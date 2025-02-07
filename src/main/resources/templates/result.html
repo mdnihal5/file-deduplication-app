@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Deduplication Result</title>
+    <meta charset="UTF-8">
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        /* Container for the result */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        /* The result header and title */
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .result-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: #444;
+        }
+        .result-header p {
+            margin: 0;
+            font-size: 1rem;
+            color: #666;
+        }
+        /* Table for displaying duplicates */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        /* Back to Upload button */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #45a049;
+        }
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .result-header h2 {
+                font-size: 1.4rem;
+            }
+            table th, table td {
+                padding: 10px;
+            }
+            .back-btn {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Deduplication Result</h1>
+    <div th:if="${error}" class="error-message">
+        <p>Error: <span th:text="${error}"></span></p>
+    </div>
+    <div th:if="${result}">
+        <div class="result-header">
+            <h2>Deduplication Summary</h2>
+            <p>Total Files Processed: <span th:text="${result.processedFiles}"></span></p>
+            <p>Total Duplicates Found: <span th:text="${result.duplicatesFound}"></span></p>
+        </div>
+        <h3>Duplicate Files:</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>File Name</th>
+                <th>File Path</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file : ${result.duplicateFiles}">
+                <td th:text="${file.fileName}"></td>
+                <td th:text="${file.filePath}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/" class="back-btn">Back to Upload</a>
+</div>
+</body>
+</html>

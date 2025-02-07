@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>File Deduplication Upload</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+        input[type="file"] {
+            margin-bottom: 12px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        a:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Upload Folder for Deduplication</h1>
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <label for="files">Select files (upload entire folder):</label>
+    <!-- The attributes 'webkitdirectory' and 'directory' allow folder selection in supporting browsers -->
+    <input type="file" id="files" name="files" webkitdirectory directory multiple required><br><br>
+    <button type="submit">Upload and Deduplicate</button>
+</form>
+</body>
+</html>
