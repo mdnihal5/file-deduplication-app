@@ -3,11 +3,17 @@
 ## Overview
 The **File Deduplication Application** is a simple yet powerful tool built with Spring Boot that helps you find and remove duplicate files from a directory. It works in two modes:
 
+***IMPORTANT NOTE***
 - **Web Mode:** A user-friendly interface where you can upload a folder and see the duplicate files.
+                Web Mode Does't Support Deletion 
+                1. since files uploaded by user from system stays in system
+                2. if they upload folders from their cloud services, we cannot access without proper credentials
+                I can Implement If requred
 - **CLI Mode:** A command-line interface that scans a folder and gives you options to delete duplicates or back them up (locally or to Cloudinary).
+                In CMD it support File scanning and duplicate file detection based on their hash value and move that folder to other backup folder
 
 This app ensures that you don't waste storage space on duplicate files while giving you control over how to handle them.
-
+Used Docker to
 ---
 
 ## Features
