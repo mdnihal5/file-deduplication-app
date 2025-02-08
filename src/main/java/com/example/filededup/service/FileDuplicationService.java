@@ -36,7 +36,7 @@ public class FileDuplicationService {
         collectFiles(dir, allFiles);
 
         for (File file : allFiles) {
-            if (file.isFile()) {
+            if (file.isFile() && isTextFile(file)) {
                 processedFiles++;
                 try {
                     String fileHash = HashFile.getHash(file);
@@ -111,6 +111,16 @@ public class FileDuplicationService {
             System.out.println("Moved duplicate file to local backup: " + backupFile.getAbsolutePath());
         } catch (IOException e) {
             System.err.println("Failed to move file to local backup: " + e.getMessage());
+        }
+    }
+
+    private boolean isTextFile(File file) {
+        try {
+            String contentType = Files.probeContentType(file.toPath());
+            return contentType != null && contentType.startsWith("text");
+        } catch (IOException e) {
+            System.err.println("Failed to determine file type: " + file.getAbsolutePath());
+            return false;
         }
     }
 }
